@@ -1,0 +1,35 @@
+{
+  "name": "mern-crud-contacts",
+  "version": "1.0.0",
+  "description": "CRUD Operation exercise with MERN STACK",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "start-dev": "nodemon ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mirko1075/mern-crud-contacts.git"
+  },
+  "author": "MIRKO SIDDI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mirko1075/mern-crud-contacts/issues"
+  },
+  "homepage": "https://github.com/mirko1075/mern-crud-contacts#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "connect-mongo": "^4.6.0",
+    "cors": "^2.8.5",
+    "debug": "^4.3.3",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "http-errors": "^2.0.0",
+    "mongoose": "^6.1.6",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
