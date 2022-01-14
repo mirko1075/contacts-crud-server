@@ -1,2 +1,2 @@
-# mern-crud-users
-CRUD Operations - Users management - MERN
+# mern-crud-contacts
+CRUD Operations - Contacts management - MERN
