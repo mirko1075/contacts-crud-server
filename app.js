@@ -59,15 +59,26 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ROUTER
 // GET '/CONTACTLIST' Get all products
-app.get("/contacts-list/:contact", (req, res, next) => {
+app.get("/contact-list", (req, res, next) => {
   console.log("Get contacts list");
-
-  console.log("req :>> ", req);
   const contact = req.params.contact;
   console.log("contact :>> ", contact);
-  Contact.find({ contact: contact })
+  Contact.find()
     .then((contactList) => {
       res.status(200).json(contactList);
+    })
+    .catch((err) => {
+      next(createError(err));
+    });
+});
+
+// GET '/CONTACTLIST' Get one product
+app.get("/contact-list/:id", (req, res, next) => {
+  console.log("Get one contact");
+  const {id} = req.params;
+  Contact.findById(id)
+    .then((contact) => {
+      res.status(200).json(contact);
     })
     .catch((err) => {
       next(createError(err));
@@ -89,10 +100,10 @@ app.post("/contact-list", (req, res, next) => {
 
 // DELETE DELETE CONTACT ITEM
 app.delete("/contact-list", (req, res, next) => {
-  console.log("Delete contact list item");
-  const { contactId } = req.body;
-  console.log("contactId :>> ", contactId);
-  Contact.findByIdAndDelete(contactId)
+  console.log("Delete contact item");
+  const { id } = req.body;
+  console.log("id :>> ", id);
+  Contact.findByIdAndDelete(id)
     .then((contactItm) => {
       res.status(200).json(contactItm);
     })
@@ -104,9 +115,9 @@ app.delete("/contact-list", (req, res, next) => {
 // PUT UPDATE WHOLE CONTACT ITEM
 app.put("/contact-list", (req, res, next) => {
   console.log("Delete contact list item");
-  const { firstName, lastName, address, city, cap, tel, mail, active} = req.body;
-  console.log("contactId :>> ", contactId);
-  Contact.findByIdAndUpdate(contactId, { firstName, lastName, address, city, cap, tel, mail, active })
+  const { id, firstName, lastName, address, city, cap, tel, mail, active} = req.body;
+  console.log("id :>> ", id);
+  Contact.findByIdAndUpdate(id, { firstName, lastName, address, city, cap, tel, mail, active })
     .then((contactItm) => {
       res.status(200).json(contactItm);
     })
@@ -115,25 +126,7 @@ app.put("/contact-list", (req, res, next) => {
     });
 });
 
-// PUT UPDATE WHOLE CONTACT ITEM
-app.put("/contact-list", (req, res, next) => {
-  console.log("Delete contact list item");
-  const { firstName, lastName, address, city, cap, tel, mail, active} = req.body;
-  console.log("contactId :>> ", contactId);
-  Contact.findByIdAndUpdate(contactId, { firstName, lastName, address, city, cap, tel, mail, active})
-    .then((contactItm) => {
-      res.status(200).json(contactItm);
-    })
-    .catch((err) => {
-      next(createError(err));
-    });
-});
 
-// ROUTE FOR SERVING REACT APP (index.html)
-app.use((req, res, next) => {
-  // If no previous routes match the request, send back the React app.
-  res.sendFile(__dirname + "/public/index.html");
-});
 // ERROR HANDLING
 //  Catch 404 and respond with error message
 // Shows a 404 error with a message when no route is found for the request
