@@ -28,12 +28,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: [
-      "http://localhost:3000",
-      "http://localhost",
-      "http://127.0.0.1",
-      "http://127.0.0.1:3000",
-    ],
+    origin: "*",
   })
 );
 
@@ -103,7 +98,7 @@ app.delete("/contact-list", (req, res, next) => {
   console.log("Delete contact item");
   const { id } = req.body;
   console.log("id :>> ", id);
-  Contact.findByIdAndDelete(id)
+  Contact.findByIdAndRemove(id)
     .then((contactItm) => {
       res.status(200).json(contactItm);
     })

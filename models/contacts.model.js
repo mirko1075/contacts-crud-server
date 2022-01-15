@@ -10,7 +10,7 @@ const contactsSchema = new Schema(
     cap:String, 
     tel:String, 
     mail: String, 
-    done: { type: Boolean, default: false },
+    active: { type: Boolean, default: false },
   },
   {
     timestamps: {
